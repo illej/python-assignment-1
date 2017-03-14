@@ -4,12 +4,6 @@ class Controller(object):
         self.__calc = calc
         print("controller initialized")
 
-    # def run(self):
-    #     # TODO: unnecessary? yes.
-    #     self.__view.start()
-    #     self.__view.display("running!")
-    #     self.__view.stop()
-
     def load(self, file_contents):
         self.__calc.set_data(file_contents)
 

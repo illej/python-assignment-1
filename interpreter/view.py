@@ -11,14 +11,6 @@ class View(metaclass=ABCMeta):
         raise NotImplementedError()
 
     @abstractmethod
-    def start(self):
-        raise NotImplementedError()
-
-    @abstractmethod
-    def stop(self):
-        raise NotImplementedError()
-
-    @abstractmethod
     def display(self, message):
         raise NotImplementedError()
 

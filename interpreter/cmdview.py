@@ -1,6 +1,5 @@
 from cmd import Cmd
 from view import View
-import argparse
 
 
 class CmdView(View, Cmd):
@@ -13,12 +12,6 @@ class CmdView(View, Cmd):
     def set_controller(self, controller):
         self.__con = controller
         print("controller set")
-
-    def start(self):
-        print("starting..")
-
-    def stop(self):
-        pass
 
     def do_quit(self, line):
         return True
