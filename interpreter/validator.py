@@ -15,10 +15,10 @@ class Validator(object):
                           "salary",
                           "birthday"]
         self.__value_lib = {"empid": "[A-Z][0-9]{3}",
-                            "gender": "(M|F)",  # TODO: .toLowerCase() ??
+                            "gender": "(M|F)",
                             "age": "[0-9]{2}",
                             "sales": "[0-9]{3}",
-                            "bmi": "(Normal|Overweight|Obesity|Underweight)",  # TODO: .toLowerCase() ??
+                            "bmi": "(Normal|Overweight|Obesity|Underweight)",
                             "salary": "[0-9]{2,3}",
                             "birthday": "[1-31]{2}-[1-12]{2}-[0-9]{4}"}
         self.__valid = []

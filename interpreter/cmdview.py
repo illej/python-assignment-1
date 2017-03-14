@@ -42,7 +42,7 @@ class CmdView(View, Cmd):
     def do_get(self):
         """
         Syntax: get
-            Returns the data previously stored
+            Returns the previously stored data
 
         :return: Formatted data
         """
