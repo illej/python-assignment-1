@@ -13,4 +13,3 @@ class View(metaclass=ABCMeta):
     @abstractmethod
     def display(self, message):
         raise NotImplementedError()
-

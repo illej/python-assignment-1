@@ -1,4 +1,4 @@
-# receivce data
+# receive data
 # check library of regex matches
 # store any multiple matches in array (named / labeled?)
 # return array
@@ -15,11 +15,11 @@ class Validator(object):
                           "salary",
                           "birthday"]
         self.__value_lib = {"empid": "[A-Z][0-9]{3}",
-                            "gender": "(M|F)", # works TODO: .toLowerCase() ??
-                            "age": "[0-9]{2}", # works
+                            "gender": "(M|F)",  # TODO: .toLowerCase() ??
+                            "age": "[0-9]{2}",
                             "sales": "[0-9]{3}",
-                            "bmi": "(Normal|Overweight|Obesity|Underweight)", # works TODO: .toLowerCase() ??
-                            "salary": "[0-9]{2,3}", # works
+                            "bmi": "(Normal|Overweight|Obesity|Underweight)",  # TODO: .toLowerCase() ??
+                            "salary": "[0-9]{2,3}",
                             "birthday": "[1-31]{2}-[1-12]{2}-[0-9]{4}"}
         self.__valid = []
 
@@ -35,9 +35,9 @@ class Validator(object):
                 # if a valid key is found..
                 if match:
                     # store the value (assoc regex)
-                    value = self.__value_lib[match[0]] # match[0] derefences the value!
+                    value = self.__value_lib[match[0]]  # match[0] dereferences the value!
                     # find the value matching the regex
-                    data_match = re.search(value, line)
+                    data_match = re.search(value, line, flags=re.IGNORECASE)
                     # if a valid value is found..
                     if data_match:
                         # store in a list

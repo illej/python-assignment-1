@@ -18,4 +18,3 @@ class Controller(object):
         self.__validator.check(data)
         valid_data = self.__validator.get_valid()
         print(valid_data)
-

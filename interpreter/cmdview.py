@@ -31,15 +31,11 @@ class CmdView(View, Cmd):
             self.display("-- No file specified.")
             return
         else:
-            # try:
-            #     if line[-3:] ==".txt":
             with open(line, "r") as file:
                 contents = file.read()
                 print(contents)
                 self.__con.load(contents)
-                # except:
-                #     self.display("-- Wrong file type or file does not exist: Expected .txt")
-                # return contents
+
     def do_validate(self, line):
         self.__con.validate()
 
