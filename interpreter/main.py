@@ -1,11 +1,15 @@
 from controller import Controller
 from cmdview import CmdView
-from calculator import Calculator
+from _parser import _Parser
+from validator import Validator
 
 if __name__ == "__main__":
-    calc = Calculator()
+    parser = _Parser()
     cmd_view = CmdView()
-    con = Controller(cmd_view, calc)
+    validator = Validator()
+    con = Controller(cmd_view, parser, validator)
     cmd_view.set_controller(con)
     # run program
     cmd_view.cmdloop()
+
+    print()

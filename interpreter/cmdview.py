@@ -13,7 +13,7 @@ class CmdView(View, Cmd):
         self.__con = controller
         print("controller set")
 
-    def do_quit(self, line):
+    def do_quit(self):
         return True
 
     def display(self, message):
@@ -21,7 +21,7 @@ class CmdView(View, Cmd):
 
     def do_read(self, line):
         """
-        Syntax: read [filepath]
+        Syntax: read [file-path]
             Reads and processes the contents of a .txt file
 
         :param line: A String that represents the path and name of a file to be read
@@ -37,12 +37,13 @@ class CmdView(View, Cmd):
                 contents = file.read()
                 print(contents)
                 self.__con.load(contents)
-            # except:
-            #     self.display("-- Wrong file type or file does not exist: Expected .txt")
-        #return contents
+                # except:
+                #     self.display("-- Wrong file type or file does not exist: Expected .txt")
+                # return contents
+    def do_validate(self, line):
+        self.__con.validate()
 
-
-    def do_get(self, line):
+    def do_get(self):
         """
         Syntax: get
             Returns the data previously stored

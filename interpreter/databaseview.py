@@ -8,5 +8,8 @@ class DatabaseView(View):
     def stop(self):
         pass
 
-    def display(self):
+    def display(self, **kwargs):
+        pass
+
+    def set_controller(self, controller):
         pass

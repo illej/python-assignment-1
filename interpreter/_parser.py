@@ -1,6 +1,7 @@
 # TODO: change class name.
 
-class Calculator(object):
+
+class _Parser(object):
     def __init__(self):
         self.__data = []
         print("calculator initialized")
@@ -10,3 +11,4 @@ class Calculator(object):
 
     def get_data(self):
         return str(self.__data)
+
