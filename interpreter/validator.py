@@ -35,14 +35,37 @@ class Validator(object):
                 # if a valid key is found..
                 if match:
                     # store the value (assoc regex)
-                    value = self.__value_lib[match[0]]  # match[0] dereferences the value!
+                    value = self.__value_lib[match.group(0)]  # match[0] dereferences the value!
                     # find the value matching the regex
                     data_match = re.search(value, line, flags=re.IGNORECASE)
                     # if a valid value is found..
                     if data_match:
                         # store in a list
                         # TODO: possibly build a dictionary instead
-                        self.__valid.append(data_match[0])
+                        self.__valid.append(data_match.group(0))
 
-    def get_valid(self):
-        return self.__valid
+    def check_two(self, file_contents):
+        lines = file_contents.split()
+        print(lines)
+
+        data_dict = dict(pair.split('=') for pair in lines)
+        print(data_dict)
+
+    # if __name__ == '__main__':
+        def get_valid(self):
+            return self.__valid
+
+    # attempt 1
+    # for key, value.. in dict
+    #     for key2, value2.. in file_dict
+    #         if key == key2:
+    #             if value == value2:
+    #                 return "success!"
+
+    # attempt 2
+    # for key, value.. in regex_dict:
+    #     value2 = file_dict[key]
+    #         if value == value2:
+    #             return "success!"
+
+    # attempt 3 TODO: use regex instead of of '=='

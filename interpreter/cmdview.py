@@ -39,12 +39,17 @@ class CmdView(View, Cmd):
     def do_validate(self, line):
         self.__con.validate()
 
-    def do_get(self):
+    def do_get(self, line):
         """
         Syntax: get
             Returns the previously stored data
 
         :return: Formatted data
         """
-        stored_data = self.__con.display()
-        return stored_data
+        try:
+            stored_data = self.__con.get_stored()
+            print(stored_data)
+        except:
+            print("failed to query db")
+
+# TODO: do_function to insert & query db
