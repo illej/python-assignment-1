@@ -51,9 +51,8 @@ class Validator(object):
         data_dict = dict(pair.split('=') for pair in lines)
         print(data_dict)
 
-    # if __name__ == '__main__':
-        def get_valid(self):
-            return self.__valid
+    def get_valid(self):
+        return self.__valid
 
     # attempt 1
     # for key, value.. in dict
@@ -68,4 +67,5 @@ class Validator(object):
     #         if value == value2:
     #             return "success!"
 
-    # attempt 3 TODO: use regex instead of of '=='
+# attempt 3 TODO: use regex instead of of '=='
+# TODO: merge parser and validator? what is parser even doing if the db is holding the data????

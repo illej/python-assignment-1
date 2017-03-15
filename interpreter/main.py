@@ -13,3 +13,5 @@ if __name__ == "__main__":
     cmd_view.set_controller(con)
     # run program
     cmd_view.cmdloop()
+
+# TODO: implement exception handling

@@ -11,7 +11,7 @@ class Controller(object):
 
     def display(self):
         data = self.__parser.get_data()
-        # TODO: implements ways to format data.
+        # TODO: implements ways to format data. formatter class????
         self.__view.display(data)
 
     def validate(self):
