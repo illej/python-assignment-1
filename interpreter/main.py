@@ -19,4 +19,5 @@ if __name__ == "__main__":
     cmd_view.cmdloop()
 
 # TODO: implement exception handling
+# TODO: do_function to query db
 # TODO: merge parser and validator? what is parser even doing if the db is holding the data????

@@ -50,7 +50,7 @@ class CmdView(View, Cmd):
         else:
             with open(line, "r") as file:
                 contents = file.read()
-                print(contents)
+                # print(contents)
                 self.__con.load(contents)
 
     def do_validate(self, line):
@@ -88,7 +88,9 @@ class CmdView(View, Cmd):
             print("failed to query db")
 
     def do_display(self, line):
-        self.__con.display()
-
-# TODO: do_function to insert & query db
-
+        if line:
+            flag = line.split()
+            # currently hard coded
+            self.__con.display(flag[0])
+        else:
+            self.__con.display()

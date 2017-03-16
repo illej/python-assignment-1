@@ -43,5 +43,3 @@ class Validator(object):
             print('-- Data invaild. Enter new data.')
         else:
             print('* Data validation successful.')
-            print(self.__valid_dict)
-

@@ -10,25 +10,23 @@ class Controller(object):
     def load(self, file_contents):
         self.__parser.set_data(file_contents)
 
-    def display(self):
-        # data = self.__parser.get_data()
-        # # TODO: implements ways to format data. formatter class????
-        # self.__view.display(data)
-        self.__vis.display()
+    def display(self, flag=None):
+        if flag == '-b':
+            self.__vis.display_bar()
+        elif flag == '-l':
+            self.__vis.display_line()
+        else:
+            self.__vis.display()
 
     def validate(self):
         data = self.__parser.get_data()
         self.__validator.check_dict(data)
-        valid_data = self.__validator.get_valid()
-        print('con__:', valid_data)
+        # valid_data = self.__validator.get_valid()
 
     def commit(self):
         valid_data = self.__validator.get_valid()
-        # self.__db.insert(valid_data)
+        self.__db.insert(valid_data)
 
     def get_stored(self):
         employer_data = self.__db.get()
         return employer_data
-
-# TODO: function to query db
-# TODO: function to insert to db (commit?)
