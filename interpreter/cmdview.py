@@ -8,6 +8,7 @@ class CmdView(View, Cmd):
         self.intro = "assignment 1"
         self.prompt = "> "
         print("view initialized")
+
         # TODO: cmd-line args:
         #   name for welcome message?
         #   -r [filename] to auto read a file?
@@ -61,4 +62,8 @@ class CmdView(View, Cmd):
         except:
             print("failed to query db")
 
+    def do_display(self, line):
+        self.__con.display()
+
 # TODO: do_function to insert & query db
+
