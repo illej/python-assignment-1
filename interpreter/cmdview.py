@@ -19,6 +19,13 @@ class CmdView(View, Cmd):
         print("controller set")
 
     def do_quit(self, line):
+        """
+        Syntax: quit
+            Closes the program.
+
+        :param: None
+        :return: None
+        """
         return True
 
     def display(self, message):
@@ -27,9 +34,9 @@ class CmdView(View, Cmd):
     def do_read(self, line):
         """
         Syntax: read [file-path]
-            Reads and processes the contents of a .txt file
+            Reads and processes the contents of a .txt file.
 
-        :param line: A String that represents the path and name of a file to be read
+        :param line: A String that represents the path and name of a file to be read.
         :return: None
         """
         # TODO: implement parameter options:
@@ -47,13 +54,31 @@ class CmdView(View, Cmd):
                 self.__con.load(contents)
 
     def do_validate(self, line):
+        """
+        Syntax: validate
+            Checks the data to make sure it is valid.
+
+        :param: None
+        :return: None
+        """
         self.__con.validate()
+
+    def do_commit(self, line):
+        """
+        Syntax: commit
+            Commits valid data to the database to be stored.
+
+        :param: None
+        :return: None
+        """
+        self.__con.commit()
 
     def do_get(self, line):
         """
         Syntax: get
-            Returns the previously stored data
+            Displays data from the database.
 
+        :param: None
         :return: Formatted data
         """
         try:

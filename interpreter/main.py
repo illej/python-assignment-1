@@ -11,9 +11,12 @@ if __name__ == "__main__":
     validator = Validator()
     db = Database("test.db")
     vis = Visualiser()
+
     con = Controller(cmd_view, parser, validator, db, vis)
     cmd_view.set_controller(con)
+
     # run program
     cmd_view.cmdloop()
 
 # TODO: implement exception handling
+# TODO: merge parser and validator? what is parser even doing if the db is holding the data????

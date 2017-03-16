@@ -16,17 +16,19 @@ class Controller(object):
         # self.__view.display(data)
         self.__vis.display()
 
-
     def validate(self):
         data = self.__parser.get_data()
-        # self.__validator.check(data)
-        self.__validator.check_two(data)
+        self.__validator.check_dict(data)
         valid_data = self.__validator.get_valid()
-        # print(valid_data)
+        print('con__:', valid_data)
+
+    def commit(self):
+        valid_data = self.__validator.get_valid()
+        # self.__db.insert(valid_data)
 
     def get_stored(self):
         employer_data = self.__db.get()
         return employer_data
 
 # TODO: function to query db
-# TODO: function to insert to db
+# TODO: function to insert to db (commit?)
