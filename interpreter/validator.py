@@ -17,6 +17,10 @@ class Validator(object):
         self.__valid_dict = {}
 
     def get_valid(self):
+        """
+        >>> Validator().get_valid()
+        -- No valid data has been entered.
+        """
         try:
             if self.__valid_dict:
                 return self.__valid_dict
@@ -26,6 +30,13 @@ class Validator(object):
             print(e)
 
     def check_dict(self, file_contents):
+        """
+        >>> "empid=1234\\nage=24".split()
+        ['empid=1234', 'age=24']
+        >>> file_dict = dict(pair.split('=') for pair in ['empid=D011', 'age=20'])
+        >>> file_dict['empid']
+        'D011'
+        """
         file_lines = file_contents.split() # ['empid=D011', ..]
         file_dict = dict(pair.split('=') for pair in file_lines) # {'empid': 'D011'}
         for key, value in file_dict.items():
@@ -43,3 +54,7 @@ class Validator(object):
             print('-- Data invaild. Enter new data.')
         else:
             print('* Data validation successful.')
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod(verbose=True)

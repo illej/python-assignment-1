@@ -4,7 +4,7 @@ from abc import ABCMeta, abstractmethod
 
 class View(metaclass=ABCMeta):
     def __init__(self):
-        self.__con = None
+        self.__controller = None
 
     @abstractmethod
     def set_controller(self, controller):

@@ -10,13 +10,20 @@ class Controller(object):
     def load(self, file_contents):
         self.__parser.set_data(file_contents)
 
-    def display(self, flag=None):
-        if flag == '-b':
-            self.__vis.display_bar()
-        elif flag == '-l':
-            self.__vis.display_line()
-        else:
-            self.__vis.display()
+    def display(self, line=None):
+        try:
+            if line:
+                flag = line.split()
+                if flag[0] == '-b':
+                    self.__vis.display_bar()
+                elif flag[0] == '-l':
+                    self.__vis.display_line()
+                else:
+                    raise Exception("-- Invalid flag.")
+            else:
+                self.__vis.display()
+        except Exception as e:
+            print(e)
 
     def validate(self):
         data = self.__parser.get_data()
@@ -28,5 +35,9 @@ class Controller(object):
         self.__db.insert(valid_data)
 
     def get_stored(self):
-        employer_data = self.__db.get()
-        return employer_data
+        all_data = self.__db.get()
+        # TODO: send to Formatter??
+        if all_data:
+            return all_data
+        else:
+            return "-- No data currently stored."

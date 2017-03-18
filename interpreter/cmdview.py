@@ -1,5 +1,6 @@
 from cmd import Cmd
 from view import View
+from glob import glob
 
 
 class CmdView(View, Cmd):
@@ -7,6 +8,7 @@ class CmdView(View, Cmd):
         super(View, self).__init__()
         self.intro = "assignment 1"
         self.prompt = "> "
+        self.__controller = None
         print("view initialized")
 
         # TODO: cmd-line args:
@@ -15,7 +17,7 @@ class CmdView(View, Cmd):
         #   -d to auto display db
 
     def set_controller(self, controller):
-        self.__con = controller
+        self.__controller = controller
         print("controller set")
 
     def do_quit(self, line):
@@ -30,6 +32,26 @@ class CmdView(View, Cmd):
 
     def display(self, message):
         print(message)
+
+    def do_read_glob(self, line):
+        """
+        Syntax: read_glob
+            Read files from a directory
+
+        :param: None
+        :return: None
+
+        >>> glob('*.txt')
+        ['data.txt', 'data2.txt', 'file.txt']
+        """
+
+        file_list = glob(line + '*.txt')
+        print(file_list)
+        for file in file_list:
+            with open(file, 'r') as f:
+                contents = f.read()
+                print(contents)
+                self.__controller.load(contents)
 
     def do_read(self, line):
         """
@@ -51,7 +73,7 @@ class CmdView(View, Cmd):
             with open(line, "r") as file:
                 contents = file.read()
                 # print(contents)
-                self.__con.load(contents)
+                self.__controller.load(contents)
 
     def do_validate(self, line):
         """
@@ -61,7 +83,7 @@ class CmdView(View, Cmd):
         :param: None
         :return: None
         """
-        self.__con.validate()
+        self.__controller.validate()
 
     def do_commit(self, line):
         """
@@ -71,7 +93,7 @@ class CmdView(View, Cmd):
         :param: None
         :return: None
         """
-        self.__con.commit()
+        self.__controller.commit()
 
     def do_get(self, line):
         """
@@ -82,15 +104,24 @@ class CmdView(View, Cmd):
         :return: Formatted data
         """
         try:
-            stored_data = self.__con.get_stored()
+            stored_data = self.__controller.get_stored()
             print(stored_data)
         except:
             print("failed to query db")
 
-    def do_display(self, line):
-        if line:
-            flag = line.split()
-            # currently hard coded
-            self.__con.display(flag[0])
-        else:
-            self.__con.display()
+    def do_display(self, flag):
+        """
+        Syntax: display [flag]
+            Displays a chart.
+
+        :param flag: Display different chart types.
+            none    Pie chart
+            -b      Bar chart
+            -l      Line graph
+        :return: None
+        """
+        self.__controller.display(flag)
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod(verbose=True)

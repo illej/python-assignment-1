@@ -5,11 +5,11 @@ class Database(object):
     def __init__(self, db):
         self.__db = db
         self.__connection = None # sqlite3.connect(self.__db)
-        self.__conn = None # self.__connection.cursor()
+        self.__cursor = None # self.__connection.cursor()
         self.initialise()
 
         # create table
-        self.__conn.execute('''CREATE TABLE IF NOT EXISTS employee
+        self.__cursor.execute('''CREATE TABLE IF NOT EXISTS employee
                      (id char(4) PRIMARY KEY NOT NULL,
                      gender char(1),
                      age INT(2),
@@ -19,7 +19,7 @@ class Database(object):
                      birthday DATE )''')
 
         # insert data
-        self.__conn.execute("INSERT INTO employer VALUES ('A123','M','32',100,'Normal', 104, '1996-10-24')")
+        self.__cursor.execute("INSERT INTO employer VALUES ('A123','M','32',100,'Normal', 104, '1996-10-24')")
 
     def initialise(self):
         try:
@@ -29,7 +29,7 @@ class Database(object):
         else:
             print("-- opened database successfully")
         finally:
-            self.__conn = self.__connection.cursor()
+            self.__cursor = self.__connection.cursor()
             print("-- db connection established")
 
     def insert(self, data_list):
@@ -50,14 +50,15 @@ class Database(object):
                   "'{bmi}'," \
                   "'{salary}'," \
                   "'{birthday}')".format(**data_list)
-            self.__conn.execute(sql)
+            self.__cursor.execute(sql)
         except Exception as e:
             print(e)
 
     def get(self):
-        # only prints 1 row
+        all_rows = []
         try:
-            for row in self.__conn.execute('SELECT * FROM employee'):
-                return row
+            for row in self.__cursor.execute('SELECT * FROM employee'):
+                all_rows.append(row)
+            return all_rows
         except Exception as e:
             print(e)
