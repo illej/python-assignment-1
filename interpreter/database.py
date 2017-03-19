@@ -62,3 +62,14 @@ class Database(object):
             return all_rows
         except Exception as e:
             print(e)
+
+    def query(self, column):
+        all_rows = []
+        try:
+            sql = "select {} from employee".format(column)
+            print(sql)
+            for row in self.__cursor.execute(sql):
+                all_rows.append(row)
+            print(all_rows)
+        except Exception as e:
+            print(e)

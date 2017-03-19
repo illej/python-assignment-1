@@ -5,9 +5,15 @@ class Visualiser(object):
     def __init__(self):
         print("visualiser initialized")
 
-    def display_bar(self):
+    def display_bar(self, data):
+        print(data[0])
+        data_list = []
+        for element in data[0]:
+            data_list.append(element)
+        print(data_list)
         bar_chart = pygal.Bar()
-        bar_chart.add('Fibonacci', [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55])
+
+        bar_chart.add('datas', data_list)
         bar_chart.render_in_browser()  # opens default web browser
 
     def display_line(self):

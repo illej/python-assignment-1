@@ -13,9 +13,10 @@ class Controller(object):
     def display(self, line=None):
         try:
             if line:
+                data = self.__db.get()
                 flag = line.split()
                 if flag[0] == '-b':
-                    self.__vis.display_bar()
+                    self.__vis.display_bar(data)
                 elif flag[0] == '-l':
                     self.__vis.display_line()
                 else:
@@ -41,3 +42,6 @@ class Controller(object):
             return all_data
         else:
             return "-- No data currently stored."
+
+    def query(self, line):
+        self.__db.query(line)

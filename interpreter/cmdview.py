@@ -122,6 +122,23 @@ class CmdView(View, Cmd):
         """
         self.__controller.display(flag)
 
+    def do_query(self, line):
+        """
+        Syntax: query [key]
+            Returns relevant data from the database.
+
+        :param line:
+            *   Retrieves all data
+            id
+            age
+            gender
+            salary
+            bmi
+            birthday
+        :return:
+        """
+        self.__controller.query(line)
+
 if __name__ == '__main__':
     import doctest
     doctest.testmod(verbose=True)
