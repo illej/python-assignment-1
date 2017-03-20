@@ -14,21 +14,36 @@ class Controller(object):
     def display(self, line=None):
         try:
             if line:
-                flags = line.split()
-                print("flgs: ", flags)
-                data = self.__db.query(flags[0])
-                clean_data = self.__parser.scrub_db_list(data)
-                print("clean: ", clean_data)
-                print("col: ", flags[0])
-                print("flg: ", flags[1])
-                if flags[1] == '-b':
-                    self.__vis.display_bar(clean_data)
-                elif flags[2] == '-l':
-                    self.__vis.display_line()
+                data_set_dict = {}
+                input = line.split()
+                print("input: ", input)
+                if len(input) > 1:
+                    if input[1] in self.__validator.get_valid_cols():
+                        if input[0] in self.__validator.get_valid_flags():
+                            iterinput = iter(input)
+                            next(iterinput)
+                            for set in iterinput:
+                                data = self.__db.query(set)
+                                clean_data = self.__parser.scrub_db_list(data)
+                                data_set_dict[set] = clean_data
+
+                                print("d-s-ls: ", data_set_dict)
+                            if input[0] == '-b':
+                                self.__vis.display_bar(data_set_dict)
+                            elif input[0] == '-l':
+                                self.__vis.display_line(data_set_dict)
+                            elif input[0] == '-p':
+                                self.__vis.display_pie(data_set_dict)
+                            elif input[0] == '-x':
+                                self.__vis.display_box(data_set_dict)
+                        else:
+                            raise Exception("-- Invalid flag.")
+                    else:
+                        raise Exception("-- Invalid data.")
                 else:
-                    raise Exception("-- Invalid data and/or flag.")
+                    raise Exception("* Invalid input. \n-- Type 'help display' for information on how to use this command.")
             else:
-                self.__vis.display()
+                raise Exception("* Missing parameters. \n-- Type 'help display' for information on how to use this command.")
         except Exception as e:
             print(e)
 
@@ -38,7 +53,7 @@ class Controller(object):
             self.__validator.validate(data_set)
 
     def commit(self):
-        valid_data = self.__validator.get_all_valid()
+        valid_data = self.__validator.get_valid_sets()
         for data_set in valid_data:
             self.__db.insert(data_set)
 

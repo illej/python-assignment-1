@@ -117,14 +117,22 @@ class CmdView(View, Cmd):
 
     def do_display(self, line):
         """
-        Syntax: display [flag]
-            Displays a chart.
+        Syntax: display [flag] [data] [data] .. (up to 3)
+            Displays a chart comparing data sets.
 
-        :param line: Display different chart types.
-            none    Pie chart
+        :param [flag]: Display different chart types.
+            -p      Pie chart
             -b      Bar chart
             -l      Line graph
-        :return: None
+            -x      Box graph
+        :param [data]: Data set to be displayed.
+            empid       Unique identifier for employee
+            gender      Gender of employee
+            age         Age of employee
+            salary      Salary of employee
+            sales       Sales of employee
+            bmi         Body Mass Index of employee
+            birthday    Birthday of employee
         """
         self.__controller.display(line)
 

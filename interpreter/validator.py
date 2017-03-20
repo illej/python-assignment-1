@@ -16,8 +16,25 @@ class Validator(object):
                             "birthday": "[1-31]{2}-[1-12]{2}-[0-9]{4}"}
         self.__valid_dicts_list = []
         self.__valid_dict = {}
+        self.__valid_cols = ['empid',
+                             'gender',
+                             'age',
+                             'salary',
+                             'sales',
+                             'bmi',
+                             'birthday']
+        self.__valid_flags = ['-b',
+                              '-l',
+                              '-p',
+                              '-x']
 
-    def get_all_valid(self):
+    def get_valid_cols(self):
+        return self.__valid_cols
+
+    def get_valid_flags(self):
+        return self.__valid_flags
+
+    def get_valid_sets(self):
         try:
             if self.__valid_dicts_list:
                 return self.__valid_dicts_list
