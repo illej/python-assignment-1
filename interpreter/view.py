@@ -13,11 +13,3 @@ class View(metaclass=ABCMeta):
     @abstractmethod
     def set(self):
         raise NotImplementedError()
-
-    # @abstractmethod
-    # def set_controller(self, controller):
-    #     raise NotImplementedError()
-    #
-    # @abstractmethod
-    # def display(self, message):
-    #     raise NotImplementedError()

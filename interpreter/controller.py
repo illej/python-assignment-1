@@ -21,7 +21,6 @@ class Controller(object):
                 print("clean: ", clean_data)
                 print("col: ", flags[0])
                 print("flg: ", flags[1])
-                print("old data: ", data)
                 if flags[1] == '-b':
                     self.__vis.display_bar(clean_data)
                 elif flags[2] == '-l':
@@ -36,8 +35,7 @@ class Controller(object):
     def validate(self):
         data_sets = self.__parser.get_data()
         for data_set in data_sets:
-            self.__validator.check_dict(data_set)
-        # valid_data = self.__validator.get_valid()
+            self.__validator.validate(data_set)
 
     def commit(self):
         valid_data = self.__validator.get_all_valid()
@@ -56,7 +54,7 @@ class Controller(object):
     # NEW FILE READING METHOD
     def get(self, line):
         data_sets = self.__fileview.get(line)
-        for index, data_set in enumerate(data_sets):
+        for index, data_set in enumerate(data_sets): # TODO: don't need enumeration?
             self.__parser.parse_raw_data(data_set)
 
     def query(self, line):

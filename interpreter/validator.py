@@ -26,7 +26,7 @@ class Validator(object):
         except Exception as e:
             print(e)
 
-    def check_dict(self, file_contents):
+    def validate(self, file_contents):
         """
         >>> "empid=1234\\nage=24".split()
         ['empid=1234', 'age=24']

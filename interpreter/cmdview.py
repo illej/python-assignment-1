@@ -30,9 +30,7 @@ class CmdView(View, Cmd):
         """
         return True
 
-    def display(self, message):
-        print(message)
-
+    # depricated - moved to fileview
     def do_read_glob(self, line):
         """
         Syntax: read_glob
@@ -53,6 +51,7 @@ class CmdView(View, Cmd):
                 print(contents)
                 self.__controller.load(contents)
 
+    # depricated
     def do_read(self, line):
         """
         Syntax: read [file-path]
