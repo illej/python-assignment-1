@@ -7,9 +7,17 @@ class View(metaclass=ABCMeta):
         self.__controller = None
 
     @abstractmethod
-    def set_controller(self, controller):
+    def get(self, line):
         raise NotImplementedError()
 
     @abstractmethod
-    def display(self, message):
+    def set(self):
         raise NotImplementedError()
+
+    # @abstractmethod
+    # def set_controller(self, controller):
+    #     raise NotImplementedError()
+    #
+    # @abstractmethod
+    # def display(self, message):
+    #     raise NotImplementedError()

@@ -8,6 +8,7 @@ class Database(object):
         self.__cursor = None # self.__connection.cursor()
         self.initialise()
 
+        # TODO: tidy up db creation. 'create' method?
         # create table
         self.__cursor.execute('''CREATE TABLE IF NOT EXISTS employee
                      (id char(4) PRIMARY KEY NOT NULL,
@@ -54,6 +55,7 @@ class Database(object):
         except Exception as e:
             print(e)
 
+    # TODO: depricated? maybe 'get' is a better method name though?
     def get(self):
         all_rows = []
         try:
@@ -67,9 +69,10 @@ class Database(object):
         all_rows = []
         try:
             sql = "select {} from employee".format(column)
-            print(sql)
             for row in self.__cursor.execute(sql):
+                # print("row: ", row)
                 all_rows.append(row)
-            print(all_rows)
+            # print("query result: ", all_rows)
+            return all_rows
         except Exception as e:
             print(e)

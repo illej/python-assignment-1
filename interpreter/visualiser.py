@@ -5,15 +5,20 @@ class Visualiser(object):
     def __init__(self):
         print("visualiser initialized")
 
-    def display_bar(self, data):
-        print(data[0])
-        data_list = []
-        for element in data[0]:
-            data_list.append(element)
-        print(data_list)
-        bar_chart = pygal.Bar()
+    def display_bar(self, data_list):
+        # TODO: maybe move this to parser? [(x,), (y,)] -> [x, y]
+        # print("vis.data: ", data)
+        # data_list = []
+        # for element in data:
+        #     data_list.append(element[0])
+        # print("vis.data_list: ", data_list)
 
-        bar_chart.add('datas', data_list)
+        bar_chart = pygal.Bar()
+        # works!
+        for index, element in enumerate(data_list):
+            bar_chart.add('data {}'.format(index), element)
+        # bar_chart.add('datas1', data_list[0])
+        # bar_chart.add('datas2', data_list[1])
         bar_chart.render_in_browser()  # opens default web browser
 
     def display_line(self):

@@ -104,23 +104,30 @@ class CmdView(View, Cmd):
         :return: Formatted data
         """
         try:
-            stored_data = self.__controller.get_stored()
-            print(stored_data)
+            # stored_data = self.__controller.get_stored()
+            # print(stored_data)
+            self.get(line)
         except:
             print("failed to query db")
 
-    def do_display(self, flag):
+    def get(self, line):
+        self.__controller.get(line)
+
+    def set(self):
+        pass
+
+    def do_display(self, line):
         """
         Syntax: display [flag]
             Displays a chart.
 
-        :param flag: Display different chart types.
+        :param line: Display different chart types.
             none    Pie chart
             -b      Bar chart
             -l      Line graph
         :return: None
         """
-        self.__controller.display(flag)
+        self.__controller.display(line)
 
     def do_query(self, line):
         """

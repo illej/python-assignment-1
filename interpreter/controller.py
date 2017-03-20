@@ -1,6 +1,7 @@
 class Controller(object):
-    def __init__(self, view, parser, validator, db, vis):
-        self.__view = view
+    def __init__(self, cmdview, fileview, parser, validator, db, vis):
+        self.__cmdview = cmdview
+        self.__fileview = fileview
         self.__parser = parser
         self.__validator = validator
         self.__db = db
@@ -13,28 +14,37 @@ class Controller(object):
     def display(self, line=None):
         try:
             if line:
-                data = self.__db.get()
-                flag = line.split()
-                if flag[0] == '-b':
-                    self.__vis.display_bar(data)
-                elif flag[0] == '-l':
+                flags = line.split()
+                print("flgs: ", flags)
+                data = self.__db.query(flags[0])
+                clean_data = self.__parser.scrub_db_list(data)
+                print("clean: ", clean_data)
+                print("col: ", flags[0])
+                print("flg: ", flags[1])
+                print("old data: ", data)
+                if flags[1] == '-b':
+                    self.__vis.display_bar(clean_data)
+                elif flags[2] == '-l':
                     self.__vis.display_line()
                 else:
-                    raise Exception("-- Invalid flag.")
+                    raise Exception("-- Invalid data and/or flag.")
             else:
                 self.__vis.display()
         except Exception as e:
             print(e)
 
     def validate(self):
-        data = self.__parser.get_data()
-        self.__validator.check_dict(data)
+        data_sets = self.__parser.get_data()
+        for data_set in data_sets:
+            self.__validator.check_dict(data_set)
         # valid_data = self.__validator.get_valid()
 
     def commit(self):
-        valid_data = self.__validator.get_valid()
-        self.__db.insert(valid_data)
+        valid_data = self.__validator.get_all_valid()
+        for data_set in valid_data:
+            self.__db.insert(data_set)
 
+    # depricated
     def get_stored(self):
         all_data = self.__db.get()
         # TODO: send to Formatter??
@@ -42,6 +52,12 @@ class Controller(object):
             return all_data
         else:
             return "-- No data currently stored."
+
+    # NEW FILE READING METHOD
+    def get(self, line):
+        data_sets = self.__fileview.get(line)
+        for index, data_set in enumerate(data_sets):
+            self.__parser.parse_raw_data(data_set)
 
     def query(self, line):
         self.__db.query(line)
