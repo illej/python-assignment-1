@@ -52,6 +52,7 @@ class TestInterpreter(unittest.TestCase):
         actual = self.controller.serialize('-r poop')
         self.assertEqual(expected, actual)
 
+    # gets weird with all the test data
     def test_06_db_query(self):
         expected = [(29,), (22,), (35,), (29,), (30,), (22,), (21,), (50,), (52,), (19,), (38,), (35,), (29,)]
         actual = self.db.get('age')

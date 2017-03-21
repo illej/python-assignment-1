@@ -11,19 +11,21 @@ class CmdView(View, Cmd):
         self.__controller = None
 
     def help_cmd(self):
-        print('Syntax: python main.py [flag] [flag] [flag] [data] .. (up to 3)')
+        print('Syntax: python main.py [flag] .. (up to 5) [data] .. (up to 3)')
         print('\n\t:args: Used to invoke functionality from the command-line.')
-        print('\t-g\t\tRead files from cwd*')
-        print('\t-v\t\tValidate data*')
-        print('\t-c\t\tCommit valid data to database*')
+        print('\t-r\t\tRebuild the database')
+        print('\t-g\t\tRead files from cwd')
+        print('\t-v\t\tValidate data')
+        print('\t-c\t\tCommit valid data to database')
         print('\t-d [data]*\tDisplay default chart (bar chart). Can be called if database is not empty.')
         print('\t\t\t\t* up to 3 sets')
-        print('\t-r\t\tRebuild the database')
-        print('\n\t\t\t\t*NOTE: Must be used in order.')
+        print('\n\t\tNOTE: -r, -g, -v, -c, must be used in order.')
 
     def _initialise(self):
         for arg in sys.argv:
-            if arg == '-g':
+            if arg == '-r':
+                self.do_rebuild_db('')
+            elif arg == '-g':
                 self.do_get('')
             elif arg == '-v':
                 self.do_validate('')
@@ -34,8 +36,6 @@ class CmdView(View, Cmd):
                 args_list = sys.argv[data_index:]
                 formatted_str = ('{} ' * len(args_list)).format(*args_list)
                 self.do_display('-b ' + formatted_str)
-            elif arg == '-r':
-                self.do_rebuild_db('')
 
     def set_controller(self, controller):
         self.__controller = controller

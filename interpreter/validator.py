@@ -5,10 +5,10 @@ class Validator(object):
     def __init__(self):
         self.__regex_lib = {"empid": "[A-Z][0-9]{3}",
                             "gender": "(M|F)",
-                            "age": "[0-9]{2}",
-                            "sales": "[0-9]{3}",
+                            "age": "^[0-9]{2}$",
+                            "sales": "^[0-9]{2,3}$",
                             "bmi": "(Normal|Overweight|Obesity|Underweight)",
-                            "salary": "[0-9]{2,3}",
+                            "salary": "^[0-9]{2,3}$",
                             "birthday": "[0-3][0-9]-[0-1][0-9]-[0-9]{4}"}
         # [0-3][0-9]-[0-1][0-9]-[0-9]{4}
         self.__valid_dicts_list = []

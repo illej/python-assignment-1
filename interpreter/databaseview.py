@@ -56,7 +56,8 @@ class DatabaseView(View):
             self.__cursor.execute(sql)
             self.__connection.commit()
         except Exception as e:
-            print('insert error:', e)
+            # print('insert error:', e)
+            pass
 
     def get(self, column):
         all_rows = []

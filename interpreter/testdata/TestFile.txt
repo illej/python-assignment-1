@@ -1,14 +1,82 @@
-A32, M, 45,  7, underweight, 25.093, 1971-11-22
-A45, F, 40, 12, normal,      34.029, 1976-11-45
-B34, X, 35,  9, overweight,  23.048, 1981-11-22
-B35, F, 30, 22, obese,       46.453, 1886-11-22
-C93, M, 25, 43, skinny,      57.455, 1991-11-22
-C87, F, 20, 12, underweight, 30.344, 1996-11-22
-C87, M, 50, 22, normal,      59.455, 1966-11-22
-D38, F, 39, 23, overweight,  47.837, 1971-11-22
-D87, M, 40, 12, normal,      34.029, 1976-11-22
-E39, F, 35, 14, overweight,  39.038, 1981-11-22
+empid=A325
+gender=M
+age=45
+sales=7
+bmi=Underweight
+salary=25
+birthday=22-11-1971
 
+empid=A452
+gender=F
+age=40
+sales=12
+bmi=Normal
+salary=34
+birthday=45-11-1976
+
+empid=B347
+gender=X
+age=35
+sales=9
+bmi=Overweight
+salary=23
+birthday=22-11-1981
+
+empid=B356
+gender=F
+age=30
+sales=22
+bmi=Obese
+salary=46
+birthday=22-11-1886
+
+empid=C935
+gender=M
+age=25
+sales=43
+bmi=Skinny
+salary=57
+birthday=22-11-1991
+
+empid=C874
+gender=F
+age=20
+sales=12
+bmi=Underweight
+salary=30
+birthday=22-11-1996
+
+empid=C873
+gender=M
+age=50
+sales=22
+bmi=Normal
+salary=59
+birthday=22-11-1966
+
+empid=D382
+gender=F
+age=39
+sales=23
+bmi=Overweight
+salary=47
+birthday=22-11-1971
+
+empid=D875
+gender=M
+age=40
+sales=12
+bmi=Normal
+salary=34
+birthday=22-11-1976
+
+empid=E395
+gender=F
+age=35
+sales=14
+bmi=Overweight
+salary=39
+birthday=22-11-1981
 
 --following to be deleted or ignored
 G
