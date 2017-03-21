@@ -2,41 +2,39 @@ import unittest
 from controller import Controller
 from cmdview import CmdView
 from fileview import FileView
-from _parser import _Parser
+from dataparser import DataParser
 from validator import Validator
-from database import Database
+from databaseview import DatabaseView
 from visualiser import Visualiser
 
 
 class TestInterpreter(unittest.TestCase):
-
     def setUp(self):
-        self.parser = _Parser()
+        self.parser = DataParser()
         self.cmd_view = CmdView()
         self.file_view = FileView()
         self.validator = Validator()
-        self.db = Database("test.db")
+        self.db = DatabaseView("test.db")
         self.vis = Visualiser()
         # self.val = Validator()
         self.controller = Controller(self.cmd_view, self.file_view, self.parser, self.validator, self.db, self.vis)
-
 
     def tearDown(self):
         pass
 
     def test_01_parser_to_list(self):
         expected = ['empid=D011', 'gender=M', 'age=29']
-        actual = _Parser()._to_list("empid=D011\ngender=M\nage=29")
+        actual = DataParser()._to_list("empid=D011\ngender=M\nage=29")
         self.assertEqual(expected, actual)
 
     def test_02_parser_to_dict(self):
         expected = {'empid': 'D011', 'gender': 'M', 'age': '29'}
-        actual = _Parser()._to_dict(['empid=D011', 'gender=M', 'age=29'])
+        actual = DataParser()._to_dict(['empid=D011', 'gender=M', 'age=29'])
         self.assertEqual(expected, actual)
 
     def test_03_parser_scrub_db_list(self):
         expected = [14, 25]
-        actual = _Parser().scrub_db_list([(14,), (25,)])
+        actual = DataParser().scrub_db_list([(14,), (25,)])
         self.assertEqual(expected, actual)
 
     @unittest.skip("unfinished test case")
@@ -56,8 +54,9 @@ class TestInterpreter(unittest.TestCase):
 
     def test_06_db_query(self):
         expected = [(29,), (22,), (35,), (29,), (30,), (22,), (21,), (50,), (52,), (19,), (38,), (35,), (29,)]
-        actual = self.db.query('age')
+        actual = self.db.get('age')
         self.assertEqual(expected, actual)
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=True)

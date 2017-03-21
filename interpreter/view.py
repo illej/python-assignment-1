@@ -11,5 +11,5 @@ class View(metaclass=ABCMeta):
         raise NotImplementedError()
 
     @abstractmethod
-    def set(self):
+    def set(self, line):
         raise NotImplementedError()

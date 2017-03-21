@@ -1,4 +1,11 @@
-X444,M,87,531,Overweight,221,27-05-1929
+empid=X444
+gender=M
+age=87
+sales=531
+bmi=Overweight
+salary=221
+birthday=27-05-1929
+
 Y572,M,30,423,Normal,513,25-11-1956
 N472,F,64,681,Obesity,13,18-03-1952
 S822,M,16,225,Underweight,651,15-08-2000

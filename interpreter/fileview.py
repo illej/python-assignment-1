@@ -15,36 +15,37 @@ class FileView(View):
         'empid=D011\\ngender=m\\nage=29\\nsales=722\\nbmi=normal\\nsalary=320\\nbirthday=23-11-1987'
         """
         if line:
-            if line == 'cwd':
+            flag = line.split()
+            if flag[0] == 'cwd':
                 print(os.getcwd())
                 contents = os.listdir(os.getcwd())
                 for item in contents:
                     if item[-4:] != '.txt' and item[-3:] != '.py' and item[-3:] != '.db':
                         print(item)
-            else:
+            elif len(flag) == 1:
                 try:
-                    dir = './' + line
-                    os.chdir(dir)
+                    directory = './' + line
+                    os.chdir(directory)
                     print(os.getcwd())
                 except Exception as e:
-                    print(e)
+                    print('fview:', e)
+        else:
+            raw_file_list = []
+            filename_list = glob('*.txt')
+            print(filename_list)
+            for file in filename_list:
+                with open(file, 'r') as f:
+                    contents = f.read()
+                    data_sets = contents.split("\n\n")
+                    for data_set in data_sets:
+                        raw_file_list.append(data_set)
+            return raw_file_list
 
-
-        raw_file_list = []
-        filename_list = glob('*.txt')
-        print(filename_list)
-        for file in filename_list:
-            with open(file, 'r') as f:
-                contents = f.read()
-                data_sets = contents.split("\n\n")
-                for data_set in data_sets:
-                    raw_file_list.append(data_set)
-        return raw_file_list
-
-    def set(self):
+    def set(self, **kwargs):
         # TODO: write data to file?
         pass
 
 if __name__ == '__main__':
     import doctest
+
     doctest.testmod()

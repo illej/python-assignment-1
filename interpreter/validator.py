@@ -1,7 +1,3 @@
-# receive data
-# check library of regex matches
-# store any multiple matches in array (named / labeled?)
-# return array
 import re
 
 
@@ -14,7 +10,7 @@ class Validator(object):
                             "bmi": "(Normal|Overweight|Obesity|Underweight)",
                             "salary": "[0-9]{2,3}",
                             "birthday": "[0-3][0-9]-[0-1][0-9]-[0-9]{4}"}
-        #[0-3][0-9]-[0-1][0-9]-[0-9]{4}
+        # [0-3][0-9]-[0-1][0-9]-[0-9]{4}
         self.__valid_dicts_list = []
         self.__valid_dict = {}
         self.__valid_cols = ['empid',
@@ -53,7 +49,7 @@ class Validator(object):
         'D011'
         """
         valid_dict = {}
-        for key, value in file_contents.items(): # file_dict
+        for key, value in file_contents.items():  # file_dict
             try:
                 match = re.search(self.__regex_lib[key], value)
                 if match:
@@ -69,8 +65,8 @@ class Validator(object):
         else:
             print('-- Data validation successful!')
             self.__valid_dicts_list.append(valid_dict)
-            # print("val.state of valid_dicts: ", self.__valid_dicts_list)
 
 if __name__ == '__main__':
     import doctest
+
     doctest.testmod()
