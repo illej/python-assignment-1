@@ -181,6 +181,9 @@ class CmdView(View, Cmd):
     def do_rebuild_db(self, line):
         self.__controller.rebuild_db()
 
+    def do_serialize(self, line):
+        self.__controller.serialize(line)
+
 if __name__ == '__main__':
     import doctest
     doctest.testmod(verbose=True)

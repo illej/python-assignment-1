@@ -1,9 +1,10 @@
 class _Parser(object):
     """
+    >>> parse = _Parser()
     >>> file_str = "empid=D011\\ngender=M\\nage=29"
-    >>> _Parser().parse_raw_data(file_str)
-    >>> d_d = _Parser().__data_dicts
-    >>> d_d['empid']
+    >>> parse.parse_raw_data(file_str)
+    >>> d_d = parse.get_data()
+    >>> d_d[0]['empid']
     'D011'
     """
     def __init__(self):

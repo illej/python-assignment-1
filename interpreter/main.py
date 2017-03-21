@@ -21,21 +21,9 @@ if __name__ == "__main__":
     # run program
     cmd_view.cmdloop()
 
-# validator - DONE
-# file reader - DONE
-# parser - DONE
-# database - DONE
-# visualiser - DONE
-
-# TODO: Haven't started
-# [ ] 6. object persistence / object serialization
-    # TODO: for writing and reading files
-# [ ] 11. unittests (at least 3)
-
 # TODO: Work in progress
 
 # [x] 3. help commands TODO: finish all
-# [x] 4. change options TODO: implement all
 # [x] 5. validation
     # TODO: age / date
     # TODO: use other data sets
@@ -44,16 +32,21 @@ if __name__ == "__main__":
 # [x] 9. Amount of error trapping & handling TODO: implement all
 # [x] 10. doctests (at least 3)
     # TODO:
-        # cmdview 1
         # fileview 2
+        # parser 4
+# [x] 11. unittests (at least 3)
+    # TODO:
         # parser 3
-# [ ] 12. breadth of test coverage (10 combined doc + unit)
+        # db 1
+# [x] 12. breadth of test coverage (10 combined doc + unit)
 
 
 
 # FINISHED
 # [x] 1. command-line arguments TODO: implement -g -v -c (get, validate and commit)
 # [x] 2. cmd module
+# [x] 4. change options TODO: implement all
+# [x] 6. object persistence / object serialization
 # [x] 7. load data from file
     # TODO: serialized
 # [x] 13. directories and file locations

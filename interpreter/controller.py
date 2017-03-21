@@ -75,7 +75,7 @@ class Controller(object):
         if all_data:
             return all_data
         else:
-            return "-- No data currently stored."
+            return "* No data currently stored."
 
     # NEW FILE READING METHOD
     def get(self, line):
@@ -85,3 +85,35 @@ class Controller(object):
 
     def query(self, line):
         print(self.__db.query(line))
+
+    def serialize(self, line):
+        try:
+            import pickle
+            args = line.split()
+            if len(args) == 1 and args[0] != '-r':
+                # write
+                filename = args[0] + '.pickle'
+                db_contents = self.__db.query('*')
+                if db_contents:
+                    with open(filename, 'wb') as p_file:
+                        pickle.dump(db_contents, p_file)
+                    print('-- Database pickled!\n\t-> as filename: {}.'.format(filename))
+                else:
+                    raise Exception('* Database is empty. Nothing to serialize.')
+            elif len(args) == 2 and args[0] == '-r':
+                # read
+                filename = args[1] + '.pickle'
+                try:
+                    with open(filename, 'rb') as p_file:
+                        data = pickle.load(p_file)
+                    # TODO: display somehow?
+                    # print('comparison with db: ', data == self.__db.query('*'))
+                    # output = "\n".join(str(i) for i in data)
+                    # print(output)
+                    print(data[0])
+                except Exception as e:
+                    print(e)
+            else:
+                raise Exception("* Invalid parameters.\n-- Type 'help serialize' for more details.")
+        except Exception as e:
+            print(e)

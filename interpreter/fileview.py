@@ -9,10 +9,9 @@ class FileView(View):
 
     def get(self, line):
         """
-        >>> glob('*.txt')
-        ['data.txt', 'data2.txt', 'data3.txt', 'file.txt']
-        >>> raw_file = FileView().get('*.txt')
-        >>> raw_file[0]
+        >>> file_list = FileView().get('')
+        ['data.txt', 'data2.txt', 'data3.txt', 'datalist.txt', 'file.txt']
+        >>> file_list[0]
         'empid=D011\\ngender=m\\nage=29\\nsales=722\\nbmi=normal\\nsalary=320\\nbirthday=23-11-1987'
         """
         if line:
