@@ -19,18 +19,23 @@ class Database(object):
         finally:
             print("-- db connection established")
 
-    def build(self):
-        # create table
-        self.__cursor.execute('''CREATE TABLE IF NOT EXISTS employee
-                             (id char(4) PRIMARY KEY NOT NULL,
-                             gender char(1),
-                             age INT(2),
-                             sales INT,
-                             bmi VARCHAR(11),
-                             salary INT,
-                             birthday DATE )''')
-        # insert data
-        self.__cursor.execute("INSERT INTO employer VALUES ('A123','M','32',100,'Normal', 104, '1996-10-24')")
+    def rebuild(self):
+        try:
+            # create table
+            self.__cursor.execute('''drop table if exists employee''')
+            self.__cursor.execute('''CREATE TABLE IF NOT EXISTS employee
+                                 (id char(4) PRIMARY KEY NOT NULL,
+                                 gender char(1),
+                                 age INT(2),
+                                 sales INT,
+                                 bmi VARCHAR(11),
+                                 salary INT,
+                                 birthday DATE )''')
+            self.__connection.commit()
+            print('-- db dropped')
+            print('-- db rebuit')
+        except Exception as e:
+            print(e)
 
     def insert(self, data_list):
         try:
@@ -51,7 +56,7 @@ class Database(object):
                   "'{salary}'," \
                   "'{birthday}')".format(**data_list)
             self.__cursor.execute(sql)
-            self.__cursor.execute("commit")
+            self.__connection.commit()
         except Exception as e:
             print(e)
 

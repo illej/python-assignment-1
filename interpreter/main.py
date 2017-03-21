@@ -6,6 +6,7 @@ from validator import Validator
 from database import Database
 from visualiser import Visualiser
 
+
 if __name__ == "__main__":
     parser = _Parser()
     cmd_view = CmdView()
@@ -20,35 +21,52 @@ if __name__ == "__main__":
     # run program
     cmd_view.cmdloop()
 
-
-
-# TODO: implement exception handling
-# TODO: do_function to query db
-# TODO: merge parser and validator? what is parser even doing if the db is holding the data????
-
 # validator - DONE
 # file reader - DONE
 # parser - DONE
-# database - unfinished
-# visualiser - unfinished
+# database - DONE
+# visualiser - DONE
 
-# [ ] 1. command-line arguments TODO: almost!
-# [x] 2. cmd module
-# [x] 3. help commands TODO: implement all
+# TODO: Haven't started
+# [ ] 6. object persistence / object serialization
+    # TODO: for writing and reading files
+# [ ] 11. unittests (at least 3)
+
+# TODO: Work in progress
+
+# [x] 3. help commands TODO: finish all
 # [x] 4. change options TODO: implement all
 # [x] 5. validation
     # TODO: age / date
     # TODO: use other data sets
-# [ ] 6. object persistence / object serialization
-# [x] 7. load data from file
-# [x] 8. Raise exceptions TODO: implement all
+# [x] 8. Raise exceptions
+    # TODO: implement all
 # [x] 9. Amount of error trapping & handling TODO: implement all
-# [x] 10. doctests (at least 3) TODO: 1 / 3 done
-# [ ] 11. unittests (at least 3)
+# [x] 10. doctests (at least 3)
+    # TODO:
+        # cmdview 1
+        # fileview 2
+        # parser 3
 # [ ] 12. breadth of test coverage (10 combined doc + unit)
+
+
+
+# FINISHED
+# [x] 1. command-line arguments TODO: implement -g -v -c (get, validate and commit)
+# [x] 2. cmd module
+# [x] 7. load data from file
+    # TODO: serialized
 # [x] 13. directories and file locations
-    # TODO: maybe look at import os?
 # [x] 14. charts
-    # TODO: better! finish off
 # [x] 15. save and read to and from database
-#   # TODO: finish reading from db
+    # TODO: inherit from View (low prio)
+
+
+
+
+
+
+
+
+
+

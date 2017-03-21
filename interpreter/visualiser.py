@@ -35,7 +35,7 @@ class Visualiser(object):
         pie_chart.title = title[:-4]
         pie_chart.render_in_browser()
 
-    def display_box(self, data_dict):
+    def display_radar(self, data_dict):
         title_builder = []
         radar_chart = pygal.Radar()
         for key, data_list in data_dict.items():

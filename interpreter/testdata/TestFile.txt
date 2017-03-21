@@ -1,0 +1,23 @@
+A32, M, 45,  7, underweight, 25.093, 1971-11-22
+A45, F, 40, 12, normal,      34.029, 1976-11-45
+B34, X, 35,  9, overweight,  23.048, 1981-11-22
+B35, F, 30, 22, obese,       46.453, 1886-11-22
+C93, M, 25, 43, skinny,      57.455, 1991-11-22
+C87, F, 20, 12, underweight, 30.344, 1996-11-22
+C87, M, 50, 22, normal,      59.455, 1966-11-22
+D38, F, 39, 23, overweight,  47.837, 1971-11-22
+D87, M, 40, 12, normal,      34.029, 1976-11-22
+E39, F, 35, 14, overweight,  39.038, 1981-11-22
+
+
+--following to be deleted or ignored
+G
+B-date
+B-sex
+G
+B-bmi
+G
+B-Duplicate Employee ID
+B-Conflicting Age and Date (SHE LIED)
+G-But almost identical to 2nd Entry
+G

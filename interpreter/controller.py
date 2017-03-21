@@ -6,7 +6,6 @@ class Controller(object):
         self.__validator = validator
         self.__db = db
         self.__vis = vis
-        print("controller initialized")
 
     def load(self, file_contents):
         self.__parser.set_data(file_contents)
@@ -16,7 +15,7 @@ class Controller(object):
             if line:
                 data_set_dict = {}
                 input = line.split()
-                print("input: ", input)
+                # print("input: ", input)
                 if len(input) > 1:
                     if input[1] in self.__validator.get_valid_cols():
                         if input[0] in self.__validator.get_valid_flags():
@@ -27,15 +26,15 @@ class Controller(object):
                                 clean_data = self.__parser.scrub_db_list(data)
                                 data_set_dict[set] = clean_data
 
-                                print("d-s-ls: ", data_set_dict)
+                                # print("d-s-ls: ", data_set_dict)
                             if input[0] == '-b':
                                 self.__vis.display_bar(data_set_dict)
                             elif input[0] == '-l':
                                 self.__vis.display_line(data_set_dict)
                             elif input[0] == '-p':
                                 self.__vis.display_pie(data_set_dict)
-                            elif input[0] == '-x':
-                                self.__vis.display_box(data_set_dict)
+                            elif input[0] == '-r':
+                                self.__vis.display_radar(data_set_dict)
                         else:
                             raise Exception("-- Invalid flag.")
                     else:
@@ -48,14 +47,26 @@ class Controller(object):
             print(e)
 
     def validate(self):
-        data_sets = self.__parser.get_data()
-        for data_set in data_sets:
-            self.__validator.validate(data_set)
+        try:
+            if self.__parser.get_data():
+                data_sets = self.__parser.get_data()
+                for data_set in data_sets:
+                    self.__validator.validate(data_set)
+            else:
+                raise Exception("* No data has been read.\n-- Type 'help get' for more details.")
+        except Exception as e:
+            print(e)
 
     def commit(self):
-        valid_data = self.__validator.get_valid_sets()
-        for data_set in valid_data:
-            self.__db.insert(data_set)
+        try:
+            valid_data = self.__validator.get_valid_sets()
+            for data_set in valid_data:
+                self.__db.insert(data_set)
+        except Exception as e:
+            print("* Could not commit data to the database.\n-- Type 'help commit' for more details.")
+
+    def rebuild_db(self):
+        self.__db.rebuild()
 
     # depricated
     def get_stored(self):
@@ -73,4 +84,4 @@ class Controller(object):
             self.__parser.parse_raw_data(data_set)
 
     def query(self, line):
-        self.__db.query(line)
+        print(self.__db.query(line))

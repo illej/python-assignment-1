@@ -13,7 +13,8 @@ class Validator(object):
                             "sales": "[0-9]{3}",
                             "bmi": "(Normal|Overweight|Obesity|Underweight)",
                             "salary": "[0-9]{2,3}",
-                            "birthday": "[1-31]{2}-[1-12]{2}-[0-9]{4}"}
+                            "birthday": "[0-3][0-9]-[0-1][0-9]-[0-9]{4}"}
+        #[0-3][0-9]-[0-1][0-9]-[0-9]{4}
         self.__valid_dicts_list = []
         self.__valid_dict = {}
         self.__valid_cols = ['empid',
@@ -26,7 +27,7 @@ class Validator(object):
         self.__valid_flags = ['-b',
                               '-l',
                               '-p',
-                              '-x']
+                              '-r']
 
     def get_valid_cols(self):
         return self.__valid_cols
@@ -39,7 +40,7 @@ class Validator(object):
             if self.__valid_dicts_list:
                 return self.__valid_dicts_list
             else:
-                raise Exception('-- No valid data has been entered.')
+                raise Exception("* No valid data has been entered.\n-- Type 'help validate' for more details.")
         except Exception as e:
             print(e)
 
@@ -58,17 +59,17 @@ class Validator(object):
                 if match:
                     valid_dict[key] = value
                 else:
-                    raise Exception('-- Invalid data: ' + key + ' = ' + value)
+                    raise Exception('* Invalid data: ' + key + ' = ' + value)
             except Exception as e:
                 print(e)
 
         if len(valid_dict) != len(self.__regex_lib):
             valid_dict.clear()
-            print('-- Data invaild. Enter new data.')
+            print('\t-> Data set thrown out.')
         else:
-            print('* Data validation successful.')
+            print('-- Data validation successful!')
             self.__valid_dicts_list.append(valid_dict)
-            print("val.state of valid_dicts: ", self.__valid_dicts_list)
+            # print("val.state of valid_dicts: ", self.__valid_dicts_list)
 
 if __name__ == '__main__':
     import doctest

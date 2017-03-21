@@ -1,13 +1,13 @@
 class _Parser(object):
     """
     >>> file_str = "empid=D011\\ngender=M\\nage=29"
-    >>> data_dict = _Parser().parse_raw_data(file_str)
-    >>> data_dict['empid']
+    >>> _Parser().parse_raw_data(file_str)
+    >>> d_d = _Parser().__data_dicts
+    >>> d_d['empid']
     'D011'
     """
     def __init__(self):
         self.__data_dicts = []
-        # print("parser initialized")
 
     # depricated
     def set_data(self, data):

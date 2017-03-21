@@ -1,24 +1,46 @@
 from cmd import Cmd
 from view import View
 from glob import glob
+import sys
 
 
 class CmdView(View, Cmd):
     def __init__(self):
         super(View, self).__init__()
-        self.intro = "assignment 1"
+        self.intro = "Interpreter"
         self.prompt = "> "
         self.__controller = None
-        print("view initialized")
 
-        # TODO: cmd-line args:
-        #   name for welcome message?
-        #   -r [filename] to auto read a file?
-        #   -d to auto display db
+    def help_cmd(self):
+        print(':args:')
+        print('\t-g\t\tRead files from cwd')
+        print('\t-v\t\tValidate data')
+        print('\t-c\t\tCommit valid data to database')
+        print('\t-d [data]*\tDisplay default chart (bar chart)')
+        print('\t\t\t* up to 3 sets')
+        print('\t-r\t\tRebuild the database')
+
+    def _initialise(self):
+        print(sys.argv)
+        iter_args = iter(sys.argv)
+        for arg in sys.argv:
+            if arg == '-g':
+                self.do_get('')
+            elif arg == '-v':
+                self.do_validate('')
+            elif arg == '-c':
+                self.do_commit('')
+            elif arg == '-d':
+                data_index = sys.argv.index(arg) + 1
+                args_list = sys.argv[data_index:]
+                formatted_str = ('{} '*len(args_list)).format(*args_list)
+                self.do_display('-b ' + formatted_str)
+            elif arg == '-r':
+                self.do_rebuild_db('')
 
     def set_controller(self, controller):
         self.__controller = controller
-        print("controller set")
+        self._initialise()
 
     def do_quit(self, line):
         """
@@ -40,7 +62,7 @@ class CmdView(View, Cmd):
         :return: None
 
         >>> glob('*.txt')
-        ['data.txt', 'data2.txt', 'file.txt']
+        ['data.txt', 'data2.txt', 'data3.txt', 'file.txt']
         """
 
         file_list = glob(line + '*.txt')
@@ -66,7 +88,7 @@ class CmdView(View, Cmd):
         # lines = line.split()
         # if lines.size() > ..etc
         if not line:
-            self.display("-- No file specified.")
+            self.display("* No file specified.")
             return
         else:
             with open(line, "r") as file:
@@ -77,7 +99,7 @@ class CmdView(View, Cmd):
     def do_validate(self, line):
         """
         Syntax: validate
-            Checks the data to make sure it is valid.
+            Checks the validity of previously read data before committing it to the database.
 
         :param: None
         :return: None
@@ -96,23 +118,25 @@ class CmdView(View, Cmd):
 
     def do_get(self, line):
         """
-        Syntax: get
-            Displays data from the database.
+        Syntax: get [dir]
+            Reads and processes data from .txt file(s).
 
-        :param: None
-        :return: Formatted data
+        :param [dir]: Optional
+            none        If no command is specified, then files in the cwd are read.
+            cwd         Shows the current working directory, and lists sub-folders.
+            <folder>    Changes the cwd to the specified sub-folder, and reads any .txt files.
         """
         try:
-            # stored_data = self.__controller.get_stored()
-            # print(stored_data)
             self.get(line)
-        except:
-            print("failed to query db")
+        except Exception as e:
+            # print("failed to query db")
+            print(e)
 
     def get(self, line):
         self.__controller.get(line)
 
     def set(self):
+        # TODO: print data to console as a table?
         pass
 
     def do_display(self, line):
@@ -120,11 +144,11 @@ class CmdView(View, Cmd):
         Syntax: display [flag] [data] [data] .. (up to 3)
             Displays a chart comparing data sets.
 
-        :param [flag]: Display different chart types.
+        :param [flag]: Display chart/graph type.
             -p      Pie chart
             -b      Bar chart
             -l      Line graph
-            -x      Box graph
+            -r      Radar chart
         :param [data]: Data set to be displayed.
             empid       Unique identifier for employee
             gender      Gender of employee
@@ -136,6 +160,7 @@ class CmdView(View, Cmd):
         """
         self.__controller.display(line)
 
+    # TODO: unfinished?
     def do_query(self, line):
         """
         Syntax: query [key]
@@ -152,6 +177,9 @@ class CmdView(View, Cmd):
         :return:
         """
         self.__controller.query(line)
+
+    def do_rebuild_db(self, line):
+        self.__controller.rebuild_db()
 
 if __name__ == '__main__':
     import doctest
